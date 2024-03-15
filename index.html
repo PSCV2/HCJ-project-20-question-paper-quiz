@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question Paper Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background-color: #f2f2f2;
+        }
+        .question {
+            display: none;
+        }
+        .show {
+            display: block;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .gcsc {
+            float: right;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Question Paper Website</h1>
+        <img src="https://hcss.nl/wp-content/uploads/2021/04/HCSS_Beeldmerk_Blauw_RGB1200-ppi-e1619025866259-300x300.png" alt="GCSC logo" class="gcsc">
+    </div>
+    <div id="questions">
+        <div class="question show" style="display: block;">What is the capital of France?</div>
+        <div class="question" style="display: none;">What is the largest planet in our solar system?</div>
+        <div class="question" style="display: none;">What is the smallest country in the world?</div>
+    </div>
+    <script>
+        var questions = document.querySelectorAll('.question');
+        var currentQuestion = 0;
+        var intervalId = setInterval(showNextQuestion, 600);
+
+        function showNextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                questions[currentQuestion].style.display = 'none';
+                currentQuestion++;
+                questions[currentQuestion].style.display = 'block';
+            } else {
+                clearInterval(intervalId);
+                showAllQuestions();
+            }
+        }
+
+        function showAllQuestions() {
+            var questionList = document.createElement('ol');
+            for (var i = 0; i < questions.length; i++) {
+                var question = document.createElement('li');
+                question.textContent = questions[i].textContent;
+                questionList.appendChild(question);
+            }
+            document.body.appendChild(questionList);
+        }
+    </script>
+</body>
+</html>
